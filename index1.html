@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creatividad e Identidad — Revista de Análisis Comparativo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =============================================
+     CSS VARIABLES — Navy / Slate / Gold palette
+  ============================================= */
+  :root {
+    --color-primary:      #0f1e35;   /* deep navy */
+    --color-secondary:    #1e3354;   /* slate navy */
+    --color-accent:       #8a6c28;   /* antique gold */
+    --color-accent-light: #b8922e;   /* warm gold */
+    --color-accent-pale:  #f0e6c8;   /* cream gold */
+    --color-bg:           #f6f7f9;   /* cool off-white */
+    --color-surface:      #ffffff;
+    --color-border:       #cdd3dc;
+    --color-border-light: #e2e7ee;
+    --color-muted:        #6b7a90;
+    --color-highlight:    #eef1f6;   /* cool blue tint */
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-body:    'Crimson Pro', 'Georgia', serif;
+    --font-ui:      'DM Sans', sans-serif;
+    --max-width: 1100px;
+    --nav-height: 50px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-primary);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--color-accent); text-decoration: none; }
+  a:hover { text-decoration: underline; color: var(--color-accent-light); }
+
+  /* =============================================
+     TOP INSTITUTIONAL BAR
+  ============================================= */
+  .inst-bar {
+    background: var(--color-primary);
+    color: rgba(255,255,255,0.55);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 7px 0;
+    border-bottom: 2px solid var(--color-accent);
+  }
+  .inst-bar-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .inst-logo-text {
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .inst-sep { color: rgba(255,255,255,0.2); margin: 0 8px; }
+  .inst-bar-right a {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .inst-bar-right a:hover { color: #fff; text-decoration: none; }
+
+  /* =============================================
+     JOURNAL HEADER
+  ============================================= */
+  .journal-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 22px 0 0;
+  }
+  .journal-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .journal-title-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+    margin-bottom: 18px;
+  }
+  .journal-cover-thumb {
+    width: 72px;
+    height: 92px;
+    background: linear-gradient(145deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  .journal-cover-thumb span {
+    color: rgba(255,255,255,0.75);
+    font-family: var(--font-display);
+    font-size: 8.5px;
+    text-align: center;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .journal-name-block h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+  .journal-name-block h1 em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+  .journal-subtitle {
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    color: var(--color-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .journal-issn {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-muted);
+  }
+  .journal-issn span { margin-right: 18px; }
+
+  /* =============================================
+     MAIN NAVIGATION
+  ============================================= */
+  .main-nav {
+    background: var(--color-secondary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(15,30,53,0.25);
+  }
+  .main-nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    position: relative;
+  }
+  .nav-links {
+    display: flex;
+    align-items: stretch;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .nav-links li { position: relative; }
+  .nav-links > li > a,
+  .nav-links > li > button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 16px;
+    height: var(--nav-height);
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-links > li > a:hover,
+  .nav-links > li > button:hover,
+  .nav-links > li.active > a {
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    text-decoration: none;
+    border-bottom-color: var(--color-accent-light);
+  }
+  .nav-links > li.active > a {
+    color: var(--color-accent-pale);
+    border-bottom-color: var(--color-accent-light);
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    min-width: 230px;
+    z-index: 200;
+    box-shadow: 0 6px 20px rgba(15,30,53,0.15);
+    list-style: none;
+  }
+  .nav-links li:hover .dropdown-menu { display: block; }
+  .dropdown-menu li a {
+    display: block;
+    padding: 10px 16px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--color-secondary);
+    border-bottom: 1px solid var(--color-border-light);
+    transition: background 0.12s;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--color-highlight);
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .dropdown-menu li:last-child a { border-bottom: none; }
+
+  .nav-search {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 6px;
+  }
+  .nav-search input {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    width: 150px;
+    outline: none;
+    transition: background 0.2s;
+  }
+  .nav-search input::placeholder { color: rgba(255,255,255,0.35); }
+  .nav-search input:focus { background: rgba(255,255,255,0.15); }
+  .nav-search button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+  }
+  .nav-search button:hover { color: #fff; }
+
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 22px;
+    padding: 0 16px;
+    height: var(--nav-height);
+    cursor: pointer;
+    align-items: center;
+  }
+
+  /* =============================================
+     LAYOUT
+  ============================================= */
+  .page-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 275px;
+    gap: 36px;
+    align-items: start;
+  }
+
+  /* =============================================
+     SPA SECTIONS
+  ============================================= */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* =============================================
+     HOME
+  ============================================= */
+  .home-intro {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    padding: 22px 26px;
+    margin-bottom: 28px;
+    font-size: 15px;
+    line-height: 1.82;
+    color: var(--color-secondary);
+    font-family: var(--font-body);
+  }
+
+  .issue-box {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .issue-box-header {
+    background: var(--color-secondary);
+    color: rgba(255,255,255,0.9);
+    padding: 9px 18px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .issue-box-body {
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .issue-cover {
+    width: 88px;
+    min-width: 88px;
+    height: 115px;
+    background: linear-gradient(145deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .issue-cover:hover { opacity: 0.82; }
+  .issue-cover span {
+    color: rgba(255,255,255,0.75);
+    font-family: var(--font-display);
+    font-size: 9px;
+    text-align: center;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .issue-meta h2 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--color-primary);
+  }
+  .issue-meta .vol-label {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-muted);
+    letter-spacing: 0.07em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .issue-meta p {
+    font-size: 14px;
+    color: var(--color-secondary);
+    line-height: 1.72;
+    margin-bottom: 8px;
+  }
+  .issue-meta .pub-date {
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    color: var(--color-muted);
+    margin-top: 8px;
+  }
+
+  /* =============================================
+     ARTICLE SECTIONS
+  ============================================= */
+  .section-label {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-surface);
+    background: var(--color-accent);
+    padding: 4px 11px;
+    display: inline-block;
+  }
+  .articles-section {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .articles-section-header {
+    background: var(--color-highlight);
+    border-bottom: 2px solid var(--color-accent);
+    padding: 9px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .articles-section-header h3 {
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+  }
+  .article-item {
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--color-border-light);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+    transition: background 0.12s;
+    cursor: pointer;
+  }
+  .article-item:last-child { border-bottom: none; }
+  .article-item:hover { background: var(--color-highlight); }
+  .article-title {
+    font-family: var(--font-display);
+    font-size: 14.5px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.42;
+    color: var(--color-accent);
+    margin-bottom: 4px;
+  }
+  .article-title:hover { text-decoration: underline; }
+  .article-author {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-secondary);
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+  .article-pages {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-muted);
+  }
+  .article-links {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .article-links span {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    letter-spacing: 0.04em;
+  }
+  .article-links span:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* =============================================
+     SIDEBAR
+  ============================================= */
+  .sidebar-block {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .sidebar-block-header {
+    background: var(--color-secondary);
+    color: rgba(255,255,255,0.88);
+    padding: 8px 14px;
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .sidebar-block-body { padding: 14px; }
+  .sidebar-block-body p {
+    font-size: 13px;
+    color: var(--color-secondary);
+    line-height: 1.65;
+    margin-bottom: 9px;
+  }
+  .sidebar-block-body p:last-child { margin-bottom: 0; }
+  .archive-list { list-style: none; }
+  .archive-list li {
+    border-bottom: 1px solid var(--color-border-light);
+    padding: 7px 0;
+  }
+  .archive-list li:last-child { border-bottom: none; }
+  .archive-list a {
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    color: var(--color-accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .archive-list a:hover { text-decoration: underline; }
+  .archive-badge {
+    background: var(--color-accent-pale);
+    border: 1px solid var(--color-border);
+    font-size: 10px;
+    padding: 2px 6px;
+    color: var(--color-accent);
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+  .index-badges { display: flex; flex-wrap: wrap; gap: 5px; }
+  .badge {
+    background: var(--color-highlight);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    padding: 3px 7px;
+    color: var(--color-secondary);
+    letter-spacing: 0.04em;
+  }
+
+  /* =============================================
+     PAGE HEADER
+  ============================================= */
+  .page-header {
+    margin-bottom: 26px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--color-border);
+  }
+  .page-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+  }
+  .page-header .breadcrumb {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+  .page-header .breadcrumb a { color: var(--color-accent); }
+
+  /* =============================================
+     ABOUT PAGE
+  ============================================= */
+  .about-intro {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--color-secondary);
+    margin-bottom: 30px;
+    padding: 20px 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    font-family: var(--font-body);
+  }
+  .team-section-title {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 30px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .member-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .member-card-header {
+    background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    padding: 13px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .member-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #fff;
+    font-style: italic;
+  }
+  .member-role {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.48);
+  }
+  .member-card-body { padding: 18px 20px; }
+  .member-card-body h4 {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 8px;
+    margin-top: 14px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .member-card-body h4:first-child { margin-top: 0; }
+  .member-card-body p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--color-secondary);
+    margin-bottom: 8px;
+  }
+  .member-card-body p:last-child { margin-bottom: 0; }
+  .theory-source {
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    color: var(--color-muted);
+    font-style: italic;
+    margin-top: 5px;
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .work-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    padding: 14px 16px;
+    transition: box-shadow 0.18s;
+  }
+  .work-card:hover { box-shadow: 0 4px 14px rgba(15,30,53,0.09); }
+  .work-card-label {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .work-card h4 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+  .work-card-author {
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    color: var(--color-muted);
+  }
+
+  /* =============================================
+     RESEÑAS
+  ============================================= */
+  .resena-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 18px 22px;
+    margin-bottom: 14px;
+    border-left: 3px solid var(--color-border);
+    transition: border-left-color 0.18s;
+  }
+  .resena-item:hover { border-left-color: var(--color-accent); }
+  .resena-item h3 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-style: italic;
+    margin-bottom: 4px;
+    color: var(--color-accent);
+    cursor: pointer;
+  }
+  .resena-item h3:hover { text-decoration: underline; }
+  .resena-author {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .resena-excerpt { font-size: 13.5px; color: var(--color-secondary); line-height: 1.72; }
+
+  /* =============================================
+     ISSUE FULL PAGE
+  ============================================= */
+  .issue-full-header {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 22px;
+    margin-bottom: 26px;
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+  }
+  .issue-full-cover {
+    width: 108px;
+    min-width: 108px;
+    height: 140px;
+    background: linear-gradient(145deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  .issue-full-cover span {
+    color: rgba(255,255,255,0.75);
+    font-family: var(--font-display);
+    font-size: 9.5px;
+    text-align: center;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .issue-full-meta h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+    font-style: italic;
+  }
+  .issue-full-meta .vol {
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    color: var(--color-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .issue-full-meta p { font-size: 14px; color: var(--color-secondary); line-height: 1.75; }
+
+  /* =============================================
+     DIRECTORIO TABLE
+  ============================================= */
+  .dir-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  .dir-card {
+    padding: 18px 20px;
+    border-right: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border-light);
+    transition: background 0.12s;
+  }
+  .dir-card:hover { background: var(--color-highlight); }
+  .dir-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+  .dir-role {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .dir-works {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+
+  /* =============================================
+     MODAL
+  ============================================= */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,30,53,0.6);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--color-surface);
+    max-width: 680px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-top: 4px solid var(--color-accent);
+    box-shadow: 0 12px 50px rgba(15,30,53,0.3);
+  }
+  .modal-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .modal-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 0;
+  }
+  .modal-close:hover { color: var(--color-primary); }
+  .modal-body { padding: 18px 22px; }
+  .modal-author {
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    color: var(--color-secondary);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .modal-abstract-label, .modal-keywords-label {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 7px;
+  }
+  .modal-abstract {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--color-secondary);
+    margin-bottom: 16px;
+  }
+  .modal-keywords { display: flex; flex-wrap: wrap; gap: 5px; }
+  .kw-tag {
+    background: var(--color-highlight);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    padding: 3px 8px;
+    color: var(--color-secondary);
+  }
+  .modal-actions {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    gap: 10px;
+  }
+  .btn-pdf {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-pdf:hover { background: var(--color-accent-light); }
+  .btn-xml {
+    background: var(--color-highlight);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    padding: 9px 18px;
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-xml:hover { background: var(--color-border); }
+
+  /* =============================================
+     NOTICE BAR
+  ============================================= */
+  .notice-bar {
+    background: var(--color-accent-pale);
+    border-bottom: 1px solid #d4b97a;
+    padding: 9px 20px;
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    color: var(--color-primary);
+    text-align: center;
+  }
+  .notice-bar strong { color: var(--color-accent); }
+  .notice-bar a { color: var(--color-accent); font-weight: 600; }
+
+  /* =============================================
+     FOOTER
+  ============================================= */
+  .site-footer {
+    background: var(--color-primary);
+    color: rgba(255,255,255,0.55);
+    padding: 38px 0 18px;
+    margin-top: 48px;
+    border-top: 3px solid var(--color-accent);
+  }
+  .footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 28px;
+  }
+  .footer-col h4 {
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 12px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .footer-col p, .footer-col li {
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.48);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { padding: 2px 0; }
+  .footer-col a { color: rgba(255,255,255,0.48); }
+  .footer-col a:hover { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .footer-bottom {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 14px 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer-bottom p {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.04em;
+  }
+  .oa-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(138,108,40,0.25);
+    border: 1px solid rgba(138,108,40,0.4);
+    padding: 4px 10px;
+    font-family: var(--font-ui);
+    font-size: 10.5px;
+    color: var(--color-accent-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* =============================================
+     RESPONSIVE
+  ============================================= */
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-links.mobile-open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: var(--nav-height);
+      left: 0; right: 0;
+      background: var(--color-secondary);
+      z-index: 300;
+      border-top: 2px solid var(--color-accent);
+    }
+    .nav-links.mobile-open > li > a,
+    .nav-links.mobile-open > li > button {
+      height: auto;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .dropdown-menu { position: static; border-top: none; box-shadow: none; }
+    .nav-links.mobile-open li:hover .dropdown-menu { display: none; }
+    .nav-search { padding: 10px 20px; }
+    .nav-search input { width: 100%; }
+    .journal-title-block { flex-direction: column; gap: 12px; }
+    .journal-name-block h1 { font-size: 1.55rem; }
+    .issue-box-body { flex-direction: column; }
+    .footer-inner { grid-template-columns: 1fr; gap: 18px; }
+    .issue-full-header { flex-direction: column; }
+    .main-nav-inner { flex-wrap: wrap; position: relative; }
+    .dir-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .article-item { grid-template-columns: 1fr; }
+    .article-links { margin-top: 5px; }
+    .member-card-header { flex-direction: column; gap: 3px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== INSTITUTIONAL BAR =================== -->
+<div class="inst-bar" role="banner">
+  <div class="inst-bar-inner">
+    <div>
+      <span class="inst-logo-text">IB — Lengua A: Lengua y Literatura</span>
+      <span class="inst-sep">|</span>
+      <span style="font-size:11px;">Proyecto de Investigación · Prueba 2</span>
+    </div>
+    <div class="inst-bar-right" style="display:flex;gap:14px;">
+      <a href="#" onclick="navigate('acerca')">Acceso abierto</a>
+      <span class="inst-sep">|</span>
+      <a href="#" onclick="navigate('acerca')">Contacto</a>
+    </div>
+  </div>
+</div>
+
+<!-- =================== JOURNAL HEADER =================== -->
+<header class="journal-header" id="top">
+  <div class="journal-header-inner">
+    <div class="journal-title-block">
+      <div class="journal-cover-thumb">
+        <span>Creatividad<br/>e Identidad<br/>—<br/>Análisis<br/>Comparativo</span>
+      </div>
+      <div class="journal-name-block">
+        <h1><em>Creatividad e Identidad</em></h1>
+        <p class="journal-subtitle">Revista de Análisis Comparativo · Lengua A: Lengua y Literatura</p>
+        <p class="journal-issn">
+          <span>ISSN (digital): 2025-CIRX</span>
+          <span>Vol. 1, Núm. 1 · 2025</span>
+          <span>Acceso abierto</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =================== MAIN NAV =================== -->
+<nav class="main-nav" role="navigation" aria-label="Navegación principal">
+  <div class="main-nav-inner">
+    <ul class="nav-links" id="nav-links" role="list">
+      <li class="active" id="nav-inicio">
+        <a href="#" onclick="navigate('inicio')">Inicio</a>
+      </li>
+      <li id="nav-actual">
+        <a href="#" onclick="navigate('actual')">Número Actual</a>
+      </li>
+      <li id="nav-articulos">
+        <a href="#" onclick="navigate('articulos')">Artículos</a>
+      </li>
+      <li id="nav-resenas">
+        <a href="#" onclick="navigate('resenas')">Reseñas</a>
+      </li>
+      <li id="nav-directorio">
+        <a href="#" onclick="navigate('directorio')">Directorio</a>
+      </li>
+      <li id="nav-acerca">
+        <button onclick="navigate('acerca')" aria-haspopup="true">Acerca de ▾</button>
+        <ul class="dropdown-menu" role="list">
+          <li><a href="#" onclick="navigate('acerca')">Sobre la revista</a></li>
+          <li><a href="#" onclick="navigate('acerca')">Equipo editorial</a></li>
+          <li><a href="#" onclick="navigate('acerca')">Protocolos de investigación</a></li>
+          <li><a href="#" onclick="navigate('acerca')">Marco teórico del proyecto</a></li>
+          <li><a href="#" onclick="navigate('acerca')">Política de acceso abierto</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-search">
+      <input type="search" placeholder="Buscar en la revista…" aria-label="Buscar">
+      <button aria-label="Buscar">⌕</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">☰</button>
+  </div>
+</nav>
+
+<!-- =================== NOTICE BAR =================== -->
+<div class="notice-bar">
+  <strong>Número actual:</strong> Vol. 1, Núm. 1 (2025) — Dossier: Creatividad e identidad en mundos fantásticos
+  &nbsp;·&nbsp; <a href="#" onclick="navigate('actual')">Ver número completo →</a>
+</div>
+
+<!-- =================== MAIN CONTENT =================== -->
+<main class="page-content" role="main" id="main-content">
+
+  <!-- ===== INICIO ===== -->
+  <div class="section active" id="section-inicio">
+    <div class="two-col">
+      <div class="main-col">
+        <div class="home-intro">
+          <strong><em>Creatividad e Identidad. Revista de Análisis Comparativo</em></strong> es una publicación de acceso abierto orientada a la difusión de investigaciones sobre la <strong>creatividad</strong> como motor de la transformación identitaria en obras del género fantástico y de aventura. El proyecto examina cómo los personajes de mundos imaginarios utilizan la creatividad para enfrentar lo desconocido, redefinir su identidad y completar procesos de crecimiento personal. La revista publica ensayos comparativos, protocolos de investigación, marcos teórico-conceptuales y reseñas críticas elaborados en el contexto del Bachillerato Internacional, Lengua A: Lengua y Literatura.
+        </div>
+
+        <div class="issue-box">
+          <div class="issue-box-header">Número Actual</div>
+          <div class="issue-box-body">
+            <div class="issue-cover" onclick="navigate('actual')" role="button" tabindex="0">
+              <span>Vol. 1<br/>Núm. 1<br/>— 2025 —<br/>Creatividad<br/>e Identidad</span>
+            </div>
+            <div class="issue-meta">
+              <p class="vol-label">Vol. 1, Núm. 1 (2025)</p>
+              <h2>Creatividad e identidad en mundos fantásticos</h2>
+              <p>Este número inaugural reúne ensayos comparativos en torno al concepto clave de <strong>creatividad</strong> y su relación con la transformación de la identidad en tres obras del género fantástico: <em>Alicia en el país de las maravillas</em> (Burton, 2010), <em>El mago de Oz</em> (Baum, 1900) y <em>Wicked</em> (Chu, 2024). Los ensayos articulan variables teóricas de personaje, espacio, tiempo e identidad desde marcos narratológicos y psicológicos contemporáneos.</p>
+              <p class="pub-date"><strong>Publicado:</strong> 2025 &nbsp;·&nbsp; <a href="#" onclick="navigate('actual')">Ver número completo →</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="articles-section">
+          <div class="articles-section-header"><span class="section-label">Presentación</span></div>
+          <div class="article-item" onclick="openModal('present')">
+            <div>
+              <div class="article-title">La creatividad y la transformación de la identidad de los personajes en mundos fantásticos</div>
+              <div class="article-author">Equipo Editorial</div>
+              <div class="article-pages">pp. 1–5</div>
+            </div>
+            <div class="article-links">
+              <span onclick="event.stopPropagation();openModal('present')">PDF</span>
+              <span>XML</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="articles-section">
+          <div class="articles-section-header">
+            <span class="section-label">Dossier</span>
+            <h3>Ensayos Comparativos</h3>
+          </div>
+          <div class="article-item" onclick="openModal('a1')">
+            <div>
+              <div class="article-title">Creatividad y transformación de la identidad: Alicia en el país de las maravillas y El mago de Oz</div>
+              <div class="article-author">Leonardo Nava</div>
+              <div class="article-pages">pp. 6–17</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a1')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a2')">
+            <div>
+              <div class="article-title">La creatividad como respuesta al entorno fantástico: análisis comparativo de Alicia en el país de las maravillas y El mago de Oz</div>
+              <div class="article-author">Santino Alarcon</div>
+              <div class="article-pages">pp. 18–30</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a2')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a3')">
+            <div>
+              <div class="article-title">Creatividad e identidad en mundos fantásticos: cómo el espacio condiciona la transformación del personaje</div>
+              <div class="article-author">Aaron Chaves</div>
+              <div class="article-pages">pp. 31–43</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a3')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a4')">
+            <div>
+              <div class="article-title">Tiempo, espacio e identidad: Alice in Wonderland y Wicked</div>
+              <div class="article-author">Mateo Alatorre</div>
+              <div class="article-pages">pp. 44–56</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a4')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a5')">
+            <div>
+              <div class="article-title">Perspectiva e identidad: cómo la forma de ver el mundo transforma a los personajes en Alicia en el país de las maravillas y El mago de Oz</div>
+              <div class="article-author">Hamed Comas</div>
+              <div class="article-pages">pp. 57–68</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a5')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a6')">
+            <div>
+              <div class="article-title">Arco narrativo y creatividad: transformación de los personajes en Alicia en el país de las maravillas y El mago de Oz</div>
+              <div class="article-author">Luis Emilio Sandoval</div>
+              <div class="article-pages">pp. 69–81</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a6')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a7')">
+            <div>
+              <div class="article-title">Creatividad en el género fantástico: literatura fantástica e identidad en Alicia y El mago de Oz</div>
+              <div class="article-author">Rodrigo Martinez</div>
+              <div class="article-pages">pp. 82–93</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a7')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a8')">
+            <div>
+              <div class="article-title">Creatividad y transformación: imaginación e identidad en Alicia en el país de las maravillas y El mago de Oz</div>
+              <div class="article-author">Paulo Cervantes</div>
+              <div class="article-pages">pp. 94–106</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a8')">PDF</span><span>XML</span></div>
+          </div>
+          <div class="article-item" onclick="openModal('a9')">
+            <div>
+              <div class="article-title">La creatividad como herramienta de cambio: transformación de los personajes en Alicia en el país de las maravillas y El mago de Oz</div>
+              <div class="article-author">Ricardo Jimenez</div>
+              <div class="article-pages">pp. 107–118</div>
+            </div>
+            <div class="article-links"><span onclick="event.stopPropagation();openModal('a9')">PDF</span><span>XML</span></div>
+          </div>
+        </div>
+      </div><!-- /main-col -->
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-block">
+          <div class="sidebar-block-header">Sobre la Revista</div>
+          <div class="sidebar-block-body">
+            <p><em>Creatividad e Identidad</em> es una publicación estudiantil de acceso abierto del Bachillerato Internacional, Lengua A.</p>
+            <p><strong>Periodicidad:</strong> Anual<br/><strong>Idioma:</strong> Español<br/><strong>Acceso:</strong> Abierto y gratuito</p>
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-header">Archivos</div>
+          <div class="sidebar-block-body">
+            <ul class="archive-list">
+              <li><a href="#" onclick="navigate('actual')">Vol. 1, Núm. 1 (2025) <span class="archive-badge">Actual</span></a></li>
+              <li><a href="#">Vol. 1, Núm. 2 (2026) <span class="archive-badge" style="color:var(--color-muted)">Próximo</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-header">Concepto Clave</div>
+          <div class="sidebar-block-body">
+            <p style="font-family:var(--font-display); font-size:18px; font-style:italic; color:var(--color-accent); text-align:center; padding:8px 0;">Creatividad</p>
+            <p>La capacidad de generar ideas originales y adaptarse a situaciones desconocidas como motor de la transformación identitaria en el género fantástico.</p>
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-header">Obras del Corpus</div>
+          <div class="sidebar-block-body">
+            <ul class="archive-list">
+              <li><a href="#">Alicia en el p. de las m. — T. Burton (2010)</a></li>
+              <li><a href="#">El mago de Oz — L. F. Baum (1900)</a></li>
+              <li><a href="#">Wicked — J. M. Chu (2024)</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-header">Indización</div>
+          <div class="sidebar-block-body">
+            <div class="index-badges">
+              <span class="badge">Literatura Comparada</span>
+              <span class="badge">Creatividad</span>
+              <span class="badge">Identidad</span>
+              <span class="badge">Género Fantástico</span>
+              <span class="badge">IB Diploma</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div><!-- /section-inicio -->
+
+
+  <!-- ===== NÚMERO ACTUAL ===== -->
+  <div class="section" id="section-actual">
+    <div class="page-header">
+      <h2>Número Actual</h2>
+      <p class="breadcrumb"><a href="#" onclick="navigate('inicio')">Inicio</a> › Número Actual</p>
+    </div>
+    <div class="issue-full-header">
+      <div class="issue-full-cover">
+        <span>Creatividad<br/>e Identidad<br/>—<br/>Vol. 1 · Núm. 1<br/>2025</span>
+      </div>
+      <div class="issue-full-meta">
+        <p class="vol">Vol. 1, Núm. 1 (2025)</p>
+        <h2>Creatividad e identidad en mundos fantásticos</h2>
+        <p>Este número inaugural reúne nueve ensayos comparativos articulados en torno al concepto clave de <strong>creatividad</strong> y su función en la transformación identitaria de los personajes de <em>Alicia en el país de las maravillas</em> (Burton, 2010), <em>El mago de Oz</em> (Baum, 1900) y <em>Wicked</em> (Chu, 2024). Los marcos teóricos empleados integran perspectivas de Campbell, Erikson, Runco & Jaeger, Chatman, Bakhtin y Todorov, entre otros.</p>
+        <p style="margin-top:10px; font-family:var(--font-ui); font-size:12.5px; color:var(--color-muted);"><strong>Publicado:</strong> 2025 &nbsp;·&nbsp; <strong>Término de instrucción:</strong> Comparar y Contrastar</p>
+      </div>
+    </div>
+
+    <div class="articles-section">
+      <div class="articles-section-header"><span class="section-label">Presentación</span></div>
+      <div class="article-item" onclick="openModal('present')">
+        <div><div class="article-title">La creatividad y la transformación de la identidad de los personajes en mundos fantásticos</div><div class="article-author">Equipo Editorial</div><div class="article-pages">pp. 1–5</div></div>
+        <div class="article-links"><span onclick="event.stopPropagation();openModal('present')">PDF</span><span>XML</span></div>
+      </div>
+    </div>
+
+    <div class="articles-section">
+      <div class="articles-section-header"><span class="section-label">Dossier</span><h3>Ensayos Comparativos</h3></div>
+      <div class="article-item" onclick="openModal('a1')"><div><div class="article-title">Creatividad y transformación de la identidad: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Leonardo Nava</div><div class="article-pages">pp. 6–17</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a1')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a2')"><div><div class="article-title">La creatividad como respuesta al entorno fantástico: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Santino Alarcon</div><div class="article-pages">pp. 18–30</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a2')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a3')"><div><div class="article-title">Creatividad e identidad en mundos fantásticos: cómo el espacio condiciona la transformación del personaje</div><div class="article-author">Aaron Chaves</div><div class="article-pages">pp. 31–43</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a3')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a4')"><div><div class="article-title">Tiempo, espacio e identidad: Alice in Wonderland y Wicked</div><div class="article-author">Mateo Alatorre</div><div class="article-pages">pp. 44–56</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a4')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a5')"><div><div class="article-title">Perspectiva e identidad: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Hamed Comas</div><div class="article-pages">pp. 57–68</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a5')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a6')"><div><div class="article-title">Arco narrativo y creatividad: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Luis Emilio Sandoval</div><div class="article-pages">pp. 69–81</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a6')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a7')"><div><div class="article-title">Creatividad en el género fantástico: identidad en Alicia y El mago de Oz</div><div class="article-author">Rodrigo Martinez</div><div class="article-pages">pp. 82–93</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a7')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a8')"><div><div class="article-title">Creatividad y transformación: imaginación e identidad en Alicia y El mago de Oz</div><div class="article-author">Paulo Cervantes</div><div class="article-pages">pp. 94–106</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a8')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a9')"><div><div class="article-title">La creatividad como herramienta de cambio: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Ricardo Jimenez</div><div class="article-pages">pp. 107–118</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a9')">PDF</span><span>XML</span></div></div>
+    </div>
+  </div><!-- /section-actual -->
+
+
+  <!-- ===== ARTÍCULOS ===== -->
+  <div class="section" id="section-articulos">
+    <div class="page-header">
+      <h2>Artículos</h2>
+      <p class="breadcrumb"><a href="#" onclick="navigate('inicio')">Inicio</a> › Artículos</p>
+    </div>
+    <div class="articles-section">
+      <div class="articles-section-header"><span class="section-label">Vol. 1, Núm. 1 (2025)</span></div>
+      <div class="article-item" onclick="openModal('a1')"><div><div class="article-title">Creatividad y transformación de la identidad: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Leonardo Nava</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 6–17 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a1')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a2')"><div><div class="article-title">La creatividad como respuesta al entorno fantástico: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Santino Alarcon</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 18–30 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a2')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a3')"><div><div class="article-title">Creatividad e identidad en mundos fantásticos: cómo el espacio condiciona la transformación del personaje</div><div class="article-author">Aaron Chaves</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 31–43 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a3')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a4')"><div><div class="article-title">Tiempo, espacio e identidad: Alice in Wonderland y Wicked</div><div class="article-author">Mateo Alatorre</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 44–56 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a4')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a5')"><div><div class="article-title">Perspectiva e identidad: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Hamed Comas</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 57–68 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a5')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a6')"><div><div class="article-title">Arco narrativo y creatividad: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Luis Emilio Sandoval</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 69–81 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a6')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a7')"><div><div class="article-title">Creatividad en el género fantástico: identidad en Alicia y El mago de Oz</div><div class="article-author">Rodrigo Martinez</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 82–93 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a7')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a8')"><div><div class="article-title">Creatividad y transformación: imaginación e identidad en Alicia y El mago de Oz</div><div class="article-author">Paulo Cervantes</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 94–106 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a8')">PDF</span><span>XML</span></div></div>
+      <div class="article-item" onclick="openModal('a9')"><div><div class="article-title">La creatividad como herramienta de cambio: Alicia en el país de las maravillas y El mago de Oz</div><div class="article-author">Ricardo Jimenez</div><div class="article-pages">Vol. 1, Núm. 1 · pp. 107–118 · 2025</div></div><div class="article-links"><span onclick="event.stopPropagation();openModal('a9')">PDF</span><span>XML</span></div></div>
+    </div>
+    <div class="articles-section">
+      <div class="articles-section-header"><span class="section-label">Vol. 1, Núm. 2 (2026) — Próximos artículos</span></div>
+      <div class="article-item"><div><div class="article-title" style="color:var(--color-muted);font-style:italic;">Convocatoria abierta — artículos en preparación</div><div class="article-author">Equipo Editorial</div><div class="article-pages">En preparación</div></div><div class="article-links"><span style="opacity:0.35;cursor:default;">PDF</span></div></div>
+    </div>
+  </div><!-- /section-articulos -->
+
+
+  <!-- ===== RESEÑAS ===== -->
+  <div class="section" id="section-resenas">
+    <div class="page-header">
+      <h2>Reseñas</h2>
+      <p class="breadcrumb"><a href="#" onclick="navigate('inicio')">Inicio</a> › Reseñas</p>
+    </div>
+    <p style="font-size:14px;color:var(--color-secondary);margin-bottom:22px;line-height:1.78;background:var(--color-surface);padding:14px 18px;border:1px solid var(--color-border);">La sección de reseñas presenta valoraciones críticas de las obras del corpus de investigación, con atención a su relevancia para el análisis de la creatividad y la transformación de la identidad en el género fantástico.</p>
+
+    <div class="resena-item">
+      <h3 onclick="openModal('r1')">Alice in Wonderland — Tim Burton, dir. (Walt Disney Pictures, 2010)</h3>
+      <div class="resena-author">Reseña de Leonardo Nava</div>
+      <p class="resena-excerpt">La adaptación de Burton transforma el universo de Lewis Carroll en un espacio de crisis identitaria donde Alicia, ahora de diecinueve años, debe enfrentarse a un mundo que desafía toda lógica. La creatividad no es aquí un rasgo decorativo sino la única herramienta disponible para navegar lo absurdo y, en el proceso, construir una identidad propia que rechace las expectativas externas...</p>
+    </div>
+    <div class="resena-item">
+      <h3 onclick="openModal('r2')">The Wonderful Wizard of Oz — L. Frank Baum (George M. Hill Company, 1900)</h3>
+      <div class="resena-author">Reseña de Santino Alarcon</div>
+      <p class="resena-excerpt">La novela de Baum construye un espacio fantástico donde la creatividad adopta una forma práctica y acumulativa: Dorothy y sus compañeros resuelven problemas concretos en un recorrido episódico cuya lógica interna, a diferencia del País de las Maravillas, permanece estable. El descubrimiento de que las cualidades buscadas ya residían en los personajes convierte la obra en una reflexión sobre el autoconocimiento...</p>
+    </div>
+    <div class="resena-item">
+      <h3 onclick="openModal('r3')">Wicked — Jon M. Chu, dir. (Universal Pictures, 2024)</h3>
+      <div class="resena-author">Reseña de Mateo Alatorre</div>
+      <p class="resena-excerpt">La adaptación cinematográfica de Chu presenta el espacio social y político de Oz como determinante en la transformación de Elphaba. A diferencia de las obras de Burton y Baum, donde el entorno fantástico opera como escenario de pruebas individuales, en Wicked el espacio impone presiones colectivas que condicionan la identidad desde afuera, haciendo de la resistencia la forma más radical de creatividad...</p>
+    </div>
+    <div class="resena-item" style="opacity:0.6;border-left-color:var(--color-border-light);">
+      <h3>El héroe de las mil caras — Joseph Campbell (FCE, 2004) — <em>Próximamente</em></h3>
+      <div class="resena-author">Reseña en preparación</div>
+      <p class="resena-excerpt">La pertinencia del arquetipo campbelliano del viaje del héroe para el análisis comparativo de las tres obras del corpus...</p>
+    </div>
+  </div><!-- /section-resenas -->
+
+
+  <!-- ===== DIRECTORIO ===== -->
+  <div class="section" id="section-directorio">
+    <div class="page-header">
+      <h2>Directorio</h2>
+      <p class="breadcrumb"><a href="#" onclick="navigate('inicio')">Inicio</a> › Directorio</p>
+    </div>
+
+    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-left:4px solid var(--color-accent);padding:18px 24px;margin-bottom:26px;font-size:14.5px;color:var(--color-secondary);line-height:1.8;font-family:var(--font-body);">
+      El directorio registra la composición del equipo editorial de <em>Creatividad e Identidad</em>. Todos los integrantes participan como editores, ensayistas y colaboradores del proyecto de investigación colectivo desarrollado en el marco de Lengua A: Lengua y Literatura del Bachillerato Internacional.
+    </div>
+
+    <p class="team-section-title">Equipo Editorial — Vol. 1, Núm. 1 · 2025</p>
+
+    <div class="dir-grid">
+      <div class="dir-card">
+        <p class="dir-name">Leonardo Nava</p>
+        <p class="dir-role">Editor Responsable</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Conceptual: Creatividad · Transformación</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Santino Alarcon</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Conceptual: Creatividad · Transformación</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Aaron Chaves</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Teórica: Personajes · V. Conceptual: Creatividad</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Mateo Alatorre</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · Wicked</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Teórica: Tiempo · Espacio</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Hamed Comas</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Conceptual: Perspectiva · Identidad</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Luis Emilio Sandoval</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Conceptual: Creatividad · Transformación</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Rodrigo Martinez</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Conceptual: Creatividad · Transformación</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Paulo Cervantes</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Conceptual: Creatividad · Transformación</p>
+      </div>
+      <div class="dir-card">
+        <p class="dir-name">Ricardo Jimenez</p>
+        <p class="dir-role">Editor · Ensayista</p>
+        <p class="dir-works">Alicia en el p. de las m. · El mago de Oz</p>
+        <p style="font-family:var(--font-ui);font-size:11px;color:var(--color-muted);margin-top:4px;">V. Conceptual: Creatividad · Transformación</p>
+      </div>
+    </div>
+
+    <p class="team-section-title">Corpus por Integrante</p>
+    <div style="background:var(--color-surface);border:1px solid var(--color-border);overflow:hidden;margin-bottom:24px;">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--font-ui);font-size:13px;">
+        <thead>
+          <tr style="background:var(--color-highlight);border-bottom:2px solid var(--color-accent);">
+            <th style="text-align:left;padding:10px 16px;font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--color-muted);font-weight:700;">Integrante</th>
+            <th style="text-align:left;padding:10px 16px;font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--color-muted);font-weight:700;">Texto 1</th>
+            <th style="text-align:left;padding:10px 16px;font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--color-muted);font-weight:700;">Texto 2</th>
+            <th style="text-align:left;padding:10px 16px;font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--color-muted);font-weight:700;">Variable teórica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Leonardo Nava</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes</td></tr>
+          <tr style="border-bottom:1px solid var(--color-border-light);background:var(--color-highlight);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Santino Alarcon</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes</td></tr>
+          <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Aaron Chaves</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes</td></tr>
+          <tr style="border-bottom:1px solid var(--color-border-light);background:var(--color-highlight);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Mateo Alatorre</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">Wicked (Chu, 2024)</td><td style="padding:9px 16px;color:var(--color-secondary);">Tiempo · Espacio</td></tr>
+          <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Hamed Comas</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes · Perspectiva · Identidad</td></tr>
+          <tr style="border-bottom:1px solid var(--color-border-light);background:var(--color-highlight);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Luis Emilio Sandoval</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes</td></tr>
+          <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Rodrigo Martinez</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes</td></tr>
+          <tr style="border-bottom:1px solid var(--color-border-light);background:var(--color-highlight);"><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Paulo Cervantes</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes</td></tr>
+          <tr><td style="padding:9px 16px;font-style:italic;color:var(--color-primary);font-family:var(--font-display);">Ricardo Jimenez</td><td style="padding:9px 16px;color:var(--color-secondary);">Alicia (Burton, 2010)</td><td style="padding:9px 16px;color:var(--color-secondary);">El mago de Oz (Baum, 1900)</td><td style="padding:9px 16px;color:var(--color-secondary);">Personajes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="team-section-title">Información Académica</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;">
+      <div class="sidebar-block"><div class="sidebar-block-header">Asignatura</div><div class="sidebar-block-body"><p>Lengua A: Lengua y Literatura<br/>Bachillerato Internacional · Prueba 2</p></div></div>
+      <div class="sidebar-block"><div class="sidebar-block-header">Término de instrucción</div><div class="sidebar-block-body"><p>Comparar y Contrastar<br/>Ensayo comparativo</p></div></div>
+      <div class="sidebar-block"><div class="sidebar-block-header">Concepto clave</div><div class="sidebar-block-body"><p>Creatividad<br/>Variables: Personaje · Tiempo · Espacio · Identidad</p></div></div>
+      <div class="sidebar-block"><div class="sidebar-block-header">Integrantes</div><div class="sidebar-block-body"><p>9 integrantes<br/>Vol. 1, Núm. 1 · 2025</p></div></div>
+    </div>
+  </div><!-- /section-directorio -->
+
+
+  <!-- ===== ACERCA DE ===== -->
+  <div class="section" id="section-acerca">
+    <div class="page-header">
+      <h2>Acerca de la Revista</h2>
+      <p class="breadcrumb"><a href="#" onclick="navigate('inicio')">Inicio</a> › Acerca de</p>
+    </div>
+
+    <div class="about-intro">
+      <strong><em>Creatividad e Identidad. Revista de Análisis Comparativo</em></strong> nace como proyecto editorial colectivo en el marco de la asignatura Lengua A: Lengua y Literatura del Bachillerato Internacional. Su propósito central es la difusión de investigaciones sobre la <strong>creatividad</strong> como motor de la transformación identitaria en obras del género fantástico y de aventura.<br/><br/>
+      El proyecto examina cómo los mundos imaginarios de <em>Alicia en el país de las maravillas</em> (Burton, 2010), <em>El mago de Oz</em> (Baum, 1900) y <em>Wicked</em> (Chu, 2024) condicionan la manifestación de la creatividad en sus personajes y, a través de ella, producen transformaciones identitarias de distinta naturaleza. La publicación adopta la forma de una revista académica de acceso abierto para cumplir una función intelectual —el análisis riguroso y comparativo de textos— y una función de servicio, al circular entre lectores interesados en la crítica literaria y fomentar el pensamiento crítico en otras comunidades de aprendizaje.
+    </div>
+
+    <p class="team-section-title">Obras del Corpus de Investigación</p>
+    <div class="works-grid">
+      <div class="work-card"><div class="work-card-label">Película · 2010</div><h4>Alice in Wonderland</h4><div class="work-card-author">Tim Burton (dir.) · Walt Disney Pictures</div></div>
+      <div class="work-card"><div class="work-card-label">Novela · 1900</div><h4>El maravilloso mago de Oz</h4><div class="work-card-author">L. Frank Baum</div></div>
+      <div class="work-card"><div class="work-card-label">Película · 2024</div><h4>Wicked</h4><div class="work-card-author">Jon M. Chu (dir.) · Universal Pictures</div></div>
+    </div>
+
+    <p class="team-section-title">Equipo Editorial — Marcos Teóricos</p>
+
+    <!-- Leonardo Nava -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Leonardo Nava</span><span class="member-role">Editor Responsable · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad en los personajes de las dos obras.</p>
+        <p><strong>Variables:</strong> V. Conceptual T1: Creatividad · V. Conceptual T2: Transformación · V. Teórica: Personajes (ambos textos)</p>
+        <h4>Marco teórico</h4>
+        <p>El proyecto articula tres conceptos centrales. La <strong>creatividad</strong> se entiende, siguiendo a Runco & Jaeger (2012), como la capacidad de generar ideas originales o reinterpretar la realidad, lo que en la literatura se refleja en la construcción de mundos fantásticos y en las decisiones de los personajes. La <strong>transformación</strong> se analiza desde Campbell (2004) y el arquetipo del viaje del héroe, proceso en el cual los personajes enfrentan desafíos que los llevan a una evolución personal. La <strong>identidad</strong> se examina desde Erikson (1968), quien plantea que la identidad se construye a partir de experiencias y decisiones personales.</p>
+        <p class="theory-source">Fuentes: Runco & Jaeger (2012); Campbell (2004); Erikson (1968).</p>
+      </div>
+    </div>
+
+    <!-- Santino Alarcon -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Santino Alarcon</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad de los personajes en las dos obras literarias.</p>
+        <p><strong>Variables:</strong> V. Conceptual T1: Creatividad · V. Conceptual T2: Transformación · V. Teórica: Personajes</p>
+        <h4>Marco teórico</h4>
+        <p>El marco teórico se centra en la variable <strong>personajes</strong> como elemento fundamental de la narrativa: los personajes son seres ficticios que participan en la historia y representan emociones, conflictos, valores o cambios humanos, y pueden clasificarse como protagonistas, antagonistas o secundarios. En Alicia, los personajes representan imaginación, curiosidad y búsqueda de identidad; en El mago de Oz, simbolizan cualidades humanas que ya poseen pero no reconocen. El marco conceptual define <strong>creatividad</strong> como capacidad de generar ideas originales y <strong>transformación</strong> como proceso de cambio emocional, psicológico o social, analizando cómo ambas variables impulsan el desarrollo de los personajes en ambas obras.</p>
+        <p class="theory-source">Fuentes: Runco & Jaeger (2012); Carroll (1865); Baum (1900).</p>
+      </div>
+    </div>
+
+    <!-- Aaron Chaves -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Aaron Chaves</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta general:</strong> ¿Cómo la creatividad de los personajes es demostrada en Alice in Wonderland y The Wonderful Wizard of Oz?</p>
+        <p><strong>Variables:</strong> V. Teórica: Personajes · V. Conceptual: Creatividad · Identidad · Espacio · Transformación</p>
+        <h4>Marco teórico</h4>
+        <p>El marco de Aaron Chaves integra la perspectiva de Seymour Chatman (<em>Story and Discourse</em>, 1978), según quien los personajes son el eje de la narrativa y a través de sus acciones se desarrolla la historia. La creatividad se define desde Mark A. Runco (2014) como la capacidad de generar ideas nuevas y adaptarse a contextos diferentes, observable claramente en mundos fantásticos. El análisis distingue entre el espacio surrealista de Alicia —que resalta creatividad e identidad no convencionales— y el espacio estructurado de Oz —que guía una transformación progresiva. El marco conceptual define creatividad, personajes, identidad, espacio y transformación como variables interrelacionadas.</p>
+        <p class="theory-source">Fuentes: Chatman (1978); Runco (2014); Baum (1900); Carroll (1865).</p>
+      </div>
+    </div>
+
+    <!-- Mateo Alatorre -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Mateo Alatorre</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta general:</strong> ¿Analiza cómo se transforma el espacio y tiempo en las obras de Alicia en el país de las maravillas y en Wicked?</p>
+        <p><strong>Variables:</strong> V. Teórica T1: Tiempo (Alicia) · V. Teórica T2: Espacio (Wicked) · V. Conceptual: Transformación</p>
+        <h4>Marco teórico</h4>
+        <p>El proyecto se fundamenta en el concepto de <strong>cronotopo</strong> de Mikhail Bakhtin (1981), que explica cómo el tiempo y el espacio están conectados y funcionan juntos para dar sentido a la historia. El marco define <strong>tiempo narrativo</strong> como la forma en que se organizan los eventos —lineal o no lineal—; <strong>espacio</strong> como el entorno donde ocurren los hechos y su significado simbólico; y <strong>transformación</strong> como el proceso de cambio influido directamente por tiempo y espacio. Se apoya además en Chatman (1978) para el análisis del discurso y en Bordwell & Thompson (2013) para el espacio cinematográfico.</p>
+        <p class="theory-source">Fuentes: Bakhtin (1981); Chatman (1978); Bordwell & Thompson (2013).</p>
+      </div>
+    </div>
+
+    <!-- Hamed Comas -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Hamed Comas</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta específica:</strong> ¿Cómo influye la perspectiva en la construcción de la identidad de los personajes en Alicia en el país de las maravillas y El mago de Oz?</p>
+        <p><strong>Variables:</strong> V. Conceptual T1: Perspectiva (Alicia) · V. Conceptual T2: Identidad (El mago de Oz) · V. Teórica: Personajes</p>
+        <h4>Marco teórico</h4>
+        <p>El marco teórico se centra en los <strong>personajes</strong> como entidades que permiten entender la historia desde su punto de vista y que cambian a lo largo del tiempo, mostrando ideas sobre la identidad y el crecimiento. El marco conceptual define <strong>perspectiva</strong> como la forma en que un personaje ve y entiende lo que le pasa —su punto de vista condicionado por experiencias, emociones y creencias— e <strong>identidad</strong> como la percepción que el personaje tiene de sí mismo, susceptible de cambio. Se apoyan en Forster (1927) para el desarrollo creíble de los personajes y en Todorov (1971) para el modelo de equilibrio narrativo.</p>
+        <p class="theory-source">Fuentes: Forster (1927); Todorov (1971); Carroll (1865); Baum (1900).</p>
+      </div>
+    </div>
+
+    <!-- Luis Emilio Sandoval -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Luis Emilio Sandoval</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad de los personajes en las dos obras literarias.</p>
+        <p><strong>Variables:</strong> V. Conceptual T1: Creatividad · V. Conceptual T2: Transformación · V. Teórica: Personajes</p>
+        <h4>Marco teórico</h4>
+        <p>El marco de Luis Emilio Sandoval se centra en el concepto de <strong>arco narrativo</strong> —el proceso de evolución interna (emocional/psicológica) y externa (acciones/decisiones) de los personajes a lo largo de la historia. El análisis compara cómo Alicia, enfrentada a un mundo absurdo, desarrolla una creatividad espontánea que cuestiona su identidad, mientras Dorothy y sus compañeros siguen un arco narrativo más estructurado donde el autodescubrimiento es progresivo. El marco conceptual articula <strong>creatividad</strong> (Runco & Jaeger, 2012), <strong>transformación</strong> (Campbell, 2008) e <strong>identidad</strong> (Erikson, 1968) como conceptos interdependientes.</p>
+        <p class="theory-source">Fuentes: Runco & Jaeger (2012); Campbell (2008); Erikson (1968).</p>
+      </div>
+    </div>
+
+    <!-- Rodrigo Martinez -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Rodrigo Martinez</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad de los personajes en las dos obras literarias.</p>
+        <p><strong>Variables:</strong> V. Conceptual T1: Creatividad · V. Conceptual T2: Transformación · V. Teórica: Personajes</p>
+        <h4>Marco teórico</h4>
+        <p>El proyecto integra una perspectiva de <strong>literatura fantástica</strong> siguiendo a Todorov (1970), quien define lo fantástico como el espacio narrativo donde la incertidumbre genera transformación. El marco conceptual define <strong>creatividad</strong> como la capacidad de imaginar, crear ideas nuevas y adaptarse; <strong>transformación</strong> como el cambio que viven los personajes en su forma de pensar o actuar; e <strong>identidad</strong> como la forma de ser, pensar y actuar del personaje, susceptible de cambio. Se incorporan Papalia & Martorell (2017) para el aprendizaje mediante experiencia y Vygotsky (1978) para el desarrollo a través de la interacción.</p>
+        <p class="theory-source">Fuentes: Todorov (1970); Papalia & Martorell (2017); Vygotsky (1978).</p>
+      </div>
+    </div>
+
+    <!-- Paulo Cervantes -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Paulo Cervantes</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta:</strong> Comparar y contrastar cómo se transforma la creatividad de los personajes en El Mago de Oz y en Alicia en el país de las maravillas.</p>
+        <p><strong>Variables:</strong> V. Teórica: Personajes · V. Conceptual T1: Creatividad · V. Conceptual T2: Transformación</p>
+        <h4>Marco teórico</h4>
+        <p>El marco de Paulo Cervantes se centra en el estudio del <strong>desarrollo de los personajes</strong> como eje central del análisis: los personajes son los que forman parte de la historia y hacen que todo pase, y a través de sus decisiones, emociones y cambios, reflejan comportamientos humanos. El marco conceptual articula <strong>creatividad</strong> como la habilidad de pensar original y encontrar soluciones distintas —en Alicia presente en el entorno fantástico que obliga a otra perspectiva— y <strong>transformación</strong> como el cambio interno o externo relacionado con el desarrollo del personaje, siguiendo a Campbell (2008). La relación entre ambas se define como directa: la creatividad impulsa la transformación.</p>
+        <p class="theory-source">Fuentes: Campbell (2008); Runco & Jaeger (2012); Erikson (1968).</p>
+      </div>
+    </div>
+
+    <!-- Ricardo Jimenez -->
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Ricardo Jimenez</span><span class="member-role">Editor · Ensayista</span></div>
+      <div class="member-card-body">
+        <h4>Proyecto de investigación</h4>
+        <p><strong>Pregunta:</strong> Comparar y contrastar cómo se transforma la creatividad de los personajes en El Mago de Oz y en Alicia en el país de las maravillas.</p>
+        <p><strong>Variables:</strong> V. Teórica: Personajes · V. Conceptual T1: Creatividad · V. Conceptual T2: Transformación</p>
+        <h4>Marco teórico</h4>
+        <p>El proyecto de Ricardo Jimenez emplea un marco teórico centrado en los <strong>personajes</strong> como seres reales o ficticios que reflejan comportamientos humanos, conflictos internos y valores sociales. Siguiendo a Runco & Jaeger (2012), la <strong>creatividad</strong> se define como la habilidad de pensar de forma original, imaginar nuevas posibilidades y encontrar soluciones distintas. La <strong>transformación</strong> es el cambio físico, emocional o mental que surge tras enfrentar retos importantes. La relación entre creatividad y transformación se define como directa: la capacidad de imaginar nuevas respuestas permite que los personajes crezcan y cambien.</p>
+        <p class="theory-source">Fuentes: Runco & Jaeger (2012); Carroll (1865); Baum (1900).</p>
+      </div>
+    </div>
+
+    <!-- PROTOCOLOS DE INVESTIGACIÓN -->
+    <p class="team-section-title" id="protocolos">Protocolos de Investigación</p>
+    <div style="background:var(--color-surface);border:1px solid var(--color-border);padding:18px 24px;margin-bottom:20px;font-size:14px;color:var(--color-secondary);line-height:1.8;font-family:var(--font-body);">
+      Los protocolos de investigación definen el término de instrucción, las variables literaria, conceptual y teórica, las preguntas de investigación (general y específica), los objetivos, la justificación (académica, personal y CAS) y el marco teórico-conceptual que orienta el análisis comparativo de cada integrante.
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Leonardo Nava</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Conceptual T1:</strong> Creatividad · <strong>V. Conceptual T2:</strong> Transformación · <strong>V. Teórica:</strong> Personajes</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> Interpreta cómo ocurre la transformación de la identidad de los personajes en las dos obras estudiadas.</p>
+        <p><strong>Específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad en los personajes de las dos obras.</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> El proyecto permite investigar, organizar y analizar información, mejorando la redacción y la capacidad de analizar textos al comparar cómo cambian los personajes y cómo se desarrolla su creatividad.</p>
+        <p><strong>Personal:</strong> El proyecto ayuda a ser más responsable y a valorar más la literatura, entendiendo mejor temas como la identidad que también tienen que ver con la vida real.</p>
+        <p><strong>CAS:</strong> Creatividad al hacer la revista desde cero con ideas propias; servicio porque puede servirle a otros estudiantes para entender mejor estos temas y a futuros alumnos como ejemplo.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Runco & Jaeger (2012): creatividad como reinterpretación de la realidad · Campbell (2004): viaje del héroe y evolución personal · Erikson (1968): identidad construida a través de experiencias y decisiones.</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Santino Alarcon</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Conceptual T1:</strong> Creatividad · <strong>V. Conceptual T2:</strong> Transformación · <strong>V. Teórica:</strong> Personajes</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> Interpreta cómo se transforma los personajes a través del espacio y tiempo en dos obras estudiadas.</p>
+        <p><strong>Específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad de los personajes en las dos obras literarias.</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> Aprender a comparar y contrastar dos obras literarias de manera crítica, identificando cómo los personajes cambian a través del espacio y el tiempo, y comprendiendo cómo la creatividad, la transformación y la identidad influyen en la construcción de los personajes.</p>
+        <p><strong>Personal:</strong> Reflexionar sobre cómo las personas también cambian con las experiencias que viven, igual que los personajes, valorando más la creatividad y la capacidad de adaptarse a nuevas situaciones.</p>
+        <p><strong>CAS:</strong> Compartir con otras personas la importancia de la creatividad y la transformación personal; motivar a otros a desarrollar confianza y nuevas ideas mediante actividades de liderazgo y apoyo emocional.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Personajes como seres ficticios que representan emociones y cambios humanos · Creatividad: ideas originales y adaptación a circunstancias inesperadas · Transformación: cambio emocional en relación con el crecimiento personal.</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Aaron Chaves</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Conceptual:</strong> Creatividad · <strong>V. Teórica:</strong> Personajes · Identidad · Espacio · Transformación</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> ¿Cómo la creatividad de los personajes es demostrada en Alice in Wonderland y The Wonderful Wizard of Oz?</p>
+        <p><strong>Particulares:</strong> ¿Cómo se transforma el espacio en las dos obras? · ¿Cómo ocurre la transformación de la identidad? · ¿De qué manera los personajes demuestran creatividad en sus acciones?</p>
+        <h4>Justificación</h4>
+        <p><strong>Personal:</strong> El autor eligió principalmente Alice in Wonderland porque al ensayar y representar al Sombrerero Loco, cada día le empezó a gustar más el personaje y la película. Comprender la mentalidad de Tim Burton al crear sus personajes puede ayudar a crear ideas propias y tomar decisiones sin depender tanto de lo que digan los demás.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Chatman (1978): personajes como eje de la narrativa · Runco (2014): creatividad como adaptación a contextos nuevos · Espacio fantástico como determinante del tipo de creatividad que los personajes desarrollan.</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Mateo Alatorre</span><span class="member-role">Alicia en el p. de las m. · Wicked</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Teórica T1:</strong> Tiempo (Alicia) · <strong>V. Teórica T2:</strong> Espacio (Wicked) · <strong>V. Conceptual:</strong> Transformación</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> ¿Analiza cómo se transforma el espacio y tiempo en las obras de Alicia en el país de las maravillas y en Wicked?</p>
+        <p><strong>Específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad en los personajes de las dos obras.</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> Entender cómo funcionan el tiempo y el espacio dentro de una historia y cómo influyen en la transformación de los personajes; desarrollar habilidades de análisis y comparación para interpretar conceptos abstractos como la identidad y la transformación.</p>
+        <p><strong>Personal:</strong> Elegí Alicia y Wicked porque son obras que llaman la atención por su forma creativa de contar historias y por cómo presentan cambios en los personajes, mostrando mundos distintos a la realidad que reflejan emociones reales.</p>
+        <p><strong>CAS:</strong> El análisis puede aportar a otras personas una forma distinta de ver estas obras, ayudando a reflexionar sobre cómo el contexto (tiempo y espacio) influye en quiénes somos y en nuestras decisiones.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Bakhtin (1981): cronotopo, tiempo y espacio como determinantes del sentido narrativo · Chatman (1978): análisis del discurso · Bordwell & Thompson (2013): espacio cinematográfico y construcción de significado.</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Hamed Comas</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Conceptual T1:</strong> Perspectiva (Alicia) · <strong>V. Conceptual T2:</strong> Identidad (El mago de Oz) · <strong>V. Teórica:</strong> Personajes</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> Interpreta cómo ocurre la transformación de la identidad de los personajes en las dos obras estudiadas.</p>
+        <p><strong>Específica:</strong> ¿Cómo influye la perspectiva en la construcción de la identidad de los personajes en Alicia en el país de las maravillas y El mago de Oz?</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> Entender cómo la perspectiva influye en la identidad de los personajes mejora las habilidades de interpretación, análisis y comparación, útiles para mejorar en la escuela y para futuros trabajos que requieran pensamiento crítico.</p>
+        <p><strong>Personal:</strong> Es interesante ver cómo los personajes cambian a lo largo de la historia y cómo su forma de ver el mundo afecta quiénes son; la reflexión sobre identidad, perspectiva y transformación se conecta con la vida personal a su edad.</p>
+        <p><strong>CAS:</strong> El proyecto puede ayudar a otras personas a reflexionar sobre la identidad y la perspectiva y a comprender mejor los textos, siendo una forma de servicio al compartir conocimiento.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Perspectiva: punto de vista condicionado por experiencias y emociones · Identidad: percepción que el personaje tiene de sí mismo, susceptible de cambio · Forster (1927): personajes que cambian de manera creíble · Todorov (1971): equilibrio narrativo y transformación.</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Luis Emilio Sandoval</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Conceptual T1:</strong> Creatividad · <strong>V. Conceptual T2:</strong> Transformación · <strong>V. Teórica:</strong> Personajes</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> Interpreta cómo ocurre la transformación de la identidad de los personajes en las dos obras literarias.</p>
+        <p><strong>Específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad de los personajes en las dos obras literarias.</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> Desarrollar habilidades de comparación y contraste, mejorar la interpretación de textos literarios, comprender cómo se construyen y evolucionan los personajes, y fortalecer la capacidad de organizar ideas y argumentar de manera clara.</p>
+        <p><strong>Personal:</strong> Alicia y El mago de Oz son historias que gustan mucho, especialmente después de las tablas, porque presentan mundos mágicos que solo pueden existir en la imaginación y que muestran creatividad en sus personajes y en sus mundos.</p>
+        <p><strong>CAS:</strong> El proyecto puede ayudar a más personas a reflexionar sobre la identidad y los cambios que todos enfrentamos, demostrando que la creatividad es una herramienta importante para comprender y enfrentar la realidad.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Arco narrativo como proceso de evolución interna y externa del personaje · Runco & Jaeger (2012): creatividad · Campbell (2008): transformación y viaje del héroe · Erikson (1968): identidad como construcción a través de la experiencia.</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Rodrigo Martinez</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Conceptual T1:</strong> Creatividad · <strong>V. Conceptual T2:</strong> Transformación · <strong>V. Teórica:</strong> Personajes</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> Interpreta cómo ocurre la transformación de la identidad de los personajes en las dos obras literarias.</p>
+        <p><strong>Específica:</strong> Compara y contrasta cómo ocurre la transformación de creatividad de los personajes en las dos obras literarias.</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> Aprender a analizar correctamente y fácilmente a los personajes de distintas obras; cada vez que se vea una película, poder entender más allá el contexto de cada personaje.</p>
+        <p><strong>Personal:</strong> Comprender mejor la mentalidad de Tim Burton al crear sus personajes y dar vida a sus ideas, lo cual puede ayudar a crear propias ideas y tomar decisiones sin depender tanto de lo que digan los demás.</p>
+        <p><strong>CAS:</strong> El análisis puede ser de utilidad para el crecimiento personal y el pensamiento crítico sobre cómo el contexto narrativo condiciona la manifestación de la creatividad.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Todorov (1970): literatura fantástica como espacio de incertidumbre · Papalia & Martorell (2017): aprendizaje mediante la experiencia · Vygotsky (1978): desarrollo a través de la interacción social · Runco & Jaeger (2012): creatividad.</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Paulo Cervantes</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Teórica:</strong> Personajes · <strong>V. Conceptual T1:</strong> Creatividad · <strong>V. Conceptual T2:</strong> Transformación</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> Interpreta cómo se transforman los personajes a través del espacio y tiempo en dos obras estudiadas.</p>
+        <p><strong>Específica:</strong> Comparar y contrastar cómo se transforma la creatividad de los personajes en El Mago de Oz y en Alicia en el país de las maravillas.</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> Fortalecer la capacidad de analizar textos literarios y reconocer semejanzas y diferencias; aprender cómo los autores representan la transformación de los personajes mediante el espacio, el tiempo y las experiencias.</p>
+        <p><strong>Personal:</strong> Comprender que las personas cambian constantemente según las situaciones que enfrentan; identificar la importancia de la creatividad y de adaptarse a los cambios, aplicándolo en la vida diaria.</p>
+        <p><strong>CAS:</strong> Compartir con otros la idea de que los cambios forman parte del crecimiento personal; apoyar a compañeros a tener una visión más positiva ante los retos promoviendo la creatividad y la confianza.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Personajes como individuos que reflejan comportamientos humanos y valores sociales · Creatividad: habilidad de pensar original y encontrar soluciones distintas · Transformación: cambio en relación con el desarrollo del personaje (Campbell, 2008).</p>
+      </div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-card-header"><span class="member-name">Protocolo · Ricardo Jimenez</span><span class="member-role">Alicia en el p. de las m. · El mago de Oz</span></div>
+      <div class="member-card-body">
+        <h4>Variables e instrucción</h4>
+        <p><strong>Término:</strong> Comparar y contrastar · <strong>V. Teórica:</strong> Personajes · <strong>V. Conceptual T1:</strong> Creatividad · <strong>V. Conceptual T2:</strong> Transformación</p>
+        <h4>Preguntas de investigación</h4>
+        <p><strong>General:</strong> Interpreta cómo ocurre la transformación de la identidad de los personajes en las dos obras.</p>
+        <p><strong>Específica:</strong> Comparar y contrastar cómo se transforma la creatividad de los personajes en El Mago de Oz y en Alicia en el país de las maravillas.</p>
+        <h4>Justificación</h4>
+        <p><strong>Académica:</strong> Fortalecer la capacidad de analizar textos literarios y reconocer semejanzas y diferencias; aprender cómo los autores representan la transformación de los personajes mediante el espacio, el tiempo y las experiencias que viven dentro de cada historia.</p>
+        <p><strong>Personal:</strong> Comprender que las personas cambian constantemente según las situaciones que enfrentan; identificar la importancia de la creatividad y la adaptación a los cambios, aplicándolo en la vida diaria y en el desarrollo como persona.</p>
+        <p><strong>CAS:</strong> Promover la creatividad, la confianza y la superación personal; esta investigación puede apoyar a compañeros o personas cercanas a tener una visión más positiva ante los retos, en actividades de servicio o trabajo colaborativo.</p>
+        <h4>Marco teórico resumido</h4>
+        <p>Personajes como seres que reflejan comportamientos humanos, conflictos internos y valores sociales · Creatividad: habilidad de pensar original (Runco & Jaeger, 2012) · Transformación: cambio físico, emocional o mental que surge tras enfrentar retos importantes.</p>
+      </div>
+    </div>
+
+    <!-- Política editorial -->
+    <p class="team-section-title">Política Editorial</p>
+    <div style="background:var(--color-surface);border:1px solid var(--color-border);padding:18px 24px;">
+      <p style="font-size:14px;color:var(--color-secondary);line-height:1.8;margin-bottom:10px;"><strong>Acceso abierto.</strong> Todos los contenidos de <em>Creatividad e Identidad</em> se distribuyen bajo licencia de acceso abierto y son de consulta gratuita.</p>
+      <p style="font-size:14px;color:var(--color-secondary);line-height:1.8;margin-bottom:10px;"><strong>Proceso de revisión.</strong> Los ensayos publicados han sido sometidos a revisión académica por parte del equipo docente y editorial.</p>
+      <p style="font-size:14px;color:var(--color-secondary);line-height:1.8;margin-bottom:0;"><strong>Originalidad.</strong> La revista publica únicamente trabajos originales inéditos que contribuyan al análisis de la creatividad y la identidad en la narrativa fantástica.</p>
+    </div>
+
+  </div><!-- /section-acerca -->
+
+</main><!-- /main -->
+
+
+<!-- =================== FOOTER =================== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Creatividad e Identidad</h4>
+      <p><em>Revista de Análisis Comparativo</em><br/>Lengua A: Lengua y Literatura<br/>Bachillerato Internacional<br/>Vol. 1, Núm. 1 · 2025</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#" onclick="navigate('inicio')">Inicio</a></li>
+        <li><a href="#" onclick="navigate('actual')">Número Actual</a></li>
+        <li><a href="#" onclick="navigate('articulos')">Artículos</a></li>
+        <li><a href="#" onclick="navigate('resenas')">Reseñas</a></li>
+        <li><a href="#" onclick="navigate('directorio')">Directorio</a></li>
+        <li><a href="#" onclick="navigate('acerca')">Acerca de</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Obras del Corpus</h4>
+      <ul>
+        <li>Alicia en el p. de las m. — T. Burton (2010)</li>
+        <li>El mago de Oz — L. F. Baum (1900)</li>
+        <li>Wicked — J. M. Chu (2024)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Creatividad e Identidad · Publicación estudiantil · Bachillerato Internacional · Todos los derechos reservados</p>
+    <div class="oa-pill">OA · Acceso Abierto</div>
+  </div>
+</footer>
+
+
+<!-- =================== MODAL =================== -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3 id="modal-title"></h3>
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-author" id="modal-author"></p>
+      <p class="modal-abstract-label">Resumen</p>
+      <p class="modal-abstract" id="modal-abstract"></p>
+      <p class="modal-keywords-label">Palabras clave</p>
+      <div class="modal-keywords" id="modal-keywords"></div>
+      <div class="modal-actions">
+        <button class="btn-pdf">↓ PDF</button>
+        <button class="btn-xml">XML</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- =================== JS =================== -->
+<script>
+  const sections = ['inicio','actual','articulos','resenas','directorio','acerca'];
+
+  function navigate(id) {
+    sections.forEach(s => {
+      document.getElementById('section-' + s).classList.remove('active');
+      const n = document.getElementById('nav-' + s);
+      if (n) n.classList.remove('active');
+    });
+    document.getElementById('section-' + id).classList.add('active');
+    const n = document.getElementById('nav-' + id);
+    if (n) n.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('nav-links').classList.remove('mobile-open');
+  }
+
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('mobile-open');
+  }
+
+  const articles = {
+    present: {
+      title: 'La creatividad y la transformación de la identidad de los personajes en mundos fantásticos',
+      author: 'Equipo Editorial',
+      abstract: 'Este número inaugural de Creatividad e Identidad presenta los ensayos comparativos elaborados por el equipo editorial en torno al concepto clave de creatividad y su función en la transformación identitaria de los personajes. El corpus comprende tres obras del género fantástico: Alicia en el país de las maravillas (Burton, 2010), El mago de Oz (Baum, 1900) y Wicked (Chu, 2024). Los marcos teóricos articulan perspectivas de Campbell, Erikson, Runco & Jaeger, Chatman, Bakhtin, Todorov, Vygotsky y Forster, entre otros.',
+      keywords: ['creatividad', 'identidad', 'transformación', 'género fantástico', 'personajes', 'viaje del héroe']
+    },
+    a1: {
+      title: 'Creatividad y transformación de la identidad: Alicia en el país de las maravillas y El mago de Oz',
+      author: 'Leonardo Nava',
+      abstract: 'Este ensayo argumenta que la creatividad funciona como un recurso de cambio interno en ambos personajes, aunque en cada texto adquiere un matiz distinto. Burton representa la creatividad de Alicia como una fuerza de ruptura —resistir las imposiciones externas y construir una identidad propia—, mientras Baum presenta la creatividad de Dorothy como una forma de adaptación y aprendizaje. Ambas protagonistas cambian gracias a la creatividad, siguiendo el arquetipo del viaje del héroe de Campbell (2004), pero Dorothy se transforma hacia la estabilidad afectiva mientras Alicia se transforma hacia la autonomía y la independencia.',
+      keywords: ['creatividad como ruptura', 'creatividad como adaptación', 'identidad narrativa', 'viaje del héroe', 'Campbell', 'Erikson']
+    },
+    a2: {
+      title: 'La creatividad como respuesta al entorno fantástico: Alicia en el país de las maravillas y El mago de Oz',
+      author: 'Santino Alarcon',
+      abstract: 'El ensayo sostiene que la creatividad en Alicia surge como adaptación a lo inesperado, mientras que en Oz se presenta como herramienta para avanzar en el viaje. En Alicia, la protagonista experimenta una transformación principalmente interna relacionada con su identidad, cuestionando constantemente quién es. En El mago de Oz, la transformación no consiste en adquirir nuevas cualidades, sino en reconocer aquellas que ya se poseen. La diferencia radica en que Alicia cambia su percepción de sí misma, mientras Dorothy reafirma su identidad, mostrando dos formas distintas de transformación.',
+      keywords: ['creatividad interna', 'creatividad práctica', 'autodescubrimiento', 'identidad inestable', 'identidad reafirmada', 'Runco & Jaeger']
+    },
+    a3: {
+      title: 'Creatividad e identidad en mundos fantásticos: cómo el espacio condiciona la transformación del personaje',
+      author: 'Aaron Chaves',
+      abstract: 'El ensayo analiza cómo el espacio fantástico condiciona el tipo de creatividad que los personajes desarrollan. En Alicia, el espacio surrealista —conversaciones ilógicas, cambios constantes del entorno— obliga a actuar de manera poco convencional, evidenciando una creatividad de adaptación al caos. En Oz, las acciones siguen una secuencia lógica donde cada reto es una oportunidad para descubrir habilidades personales, mostrando una creatividad de resolución de problemas. Chatman (1978) y Runco (2014) constituyen los ejes teóricos del análisis.',
+      keywords: ['espacio surrealista', 'espacio estructurado', 'creatividad caótica', 'creatividad estructurada', 'Chatman', 'Runco']
+    },
+    a4: {
+      title: 'Tiempo, espacio e identidad: Alice in Wonderland y Wicked',
+      author: 'Mateo Alatorre',
+      abstract: 'Este ensayo argumenta que mientras en Alice in Wonderland el tiempo es flexible y altera la percepción de la realidad, en Wicked el espacio social y político determina la evolución interna de los personajes. El tiempo fragmentado en Alicia provoca una crisis interna y genera una identidad en constante reconstrucción, mientras que en Wicked el espacio estructurado y conflictivo guía la evolución de los personajes mediante presiones externas. El concepto de cronotopo de Bakhtin (1981) articula el análisis comparativo.',
+      keywords: ['tiempo narrativo', 'espacio social', 'cronotopo', 'Bakhtin', 'identidad fragmentada', 'transformación externa', 'Wicked']
+    },
+    a5: {
+      title: 'Perspectiva e identidad: Alicia en el país de las maravillas y El mago de Oz',
+      author: 'Hamed Comas',
+      abstract: 'El ensayo examina cómo la perspectiva influye en la construcción de la identidad en ambas obras. En Alicia, la perspectiva cambia constantemente porque el entorno es extraño y sin lógica, haciendo que la identidad sea inestable por momentos. En El mago de Oz, la perspectiva de Dorothy y los demás personajes va cambiando durante el viaje, fortaleciendo su identidad al descubrir que ya poseían lo que buscaban. Siguiendo a Forster (1927) y Todorov (1971), el ensayo concluye que la identidad de Dorothy se construye de forma más firme mientras la de Alicia es más cambiante.',
+      keywords: ['perspectiva', 'identidad inestable', 'identidad firme', 'Forster', 'Todorov', 'construcción narrativa']
+    },
+    a6: {
+      title: 'Arco narrativo y creatividad: Alicia en el país de las maravillas y El mago de Oz',
+      author: 'Luis Emilio Sandoval',
+      abstract: 'Apoyándose en el concepto de arco narrativo —proceso de evolución interna y externa del personaje—, el ensayo analiza cómo la creatividad en Alicia surge como respuesta espontánea ante un mundo absurdo que cuestiona constantemente la identidad, mientras que en Oz la transformación ocurre de forma más progresiva. Los diálogos de Alicia son ilógicos y obligan a pensar de forma distinta; los de Oz tienen función orientadora y reflexiva. En los monólogos, Alicia exhibe crisis de identidad constante; Dorothy y sus compañeros desarrollan confianza conforme avanza el viaje.',
+      keywords: ['arco narrativo', 'creatividad espontánea', 'creatividad progresiva', 'diálogo', 'monólogo', 'Erikson', 'Campbell']
+    },
+    a7: {
+      title: 'Creatividad en el género fantástico: identidad en Alicia y El mago de Oz',
+      author: 'Rodrigo Martinez',
+      abstract: 'Desde la teoría de lo fantástico de Todorov (1970) y el aprendizaje mediante experiencia de Papalia & Martorell (2017), el ensayo analiza dos formas distintas de creatividad en el género fantástico. En Alicia, la creatividad surge del caos e incertidumbre y conduce a una transformación ambigua. En Oz, se desarrolla de manera estructurada y da lugar a una identidad más definida. Siguiendo a Vygotsky (1978), los personajes de Oz muestran una transformación basada en el reconocimiento progresivo de la identidad a través de la interacción social.',
+      keywords: ['literatura fantástica', 'Todorov', 'Vygotsky', 'aprendizaje experiencial', 'transformación ambigua', 'identidad definida']
+    },
+    a8: {
+      title: 'Creatividad y transformación: imaginación e identidad en Alicia y El mago de Oz',
+      author: 'Paulo Cervantes',
+      abstract: 'El ensayo analiza cómo la creatividad en Alicia se manifiesta como cuestionamiento continuo ante un mundo sin reglas lógicas —reinterpretación del entorno como forma de adaptación— mientras que en Oz se presenta como herramienta práctica para encontrar soluciones y reconocer habilidades internas. En ambas obras el entorno fantástico actúa como catalizador del cambio. La relación entre creatividad y transformación es directa: la capacidad de imaginar nuevas respuestas permite que los personajes crezcan y cambien, independientemente del tipo de entorno narrativo.',
+      keywords: ['creatividad práctica', 'creatividad reflexiva', 'entorno fantástico', 'catalizador del cambio', 'autoconocimiento', 'Campbell']
+    },
+    a9: {
+      title: 'La creatividad como herramienta de cambio: Alicia en el país de las maravillas y El mago de Oz',
+      author: 'Ricardo Jimenez',
+      abstract: 'El ensayo concluye que la creatividad puede manifestarse tanto en el pensamiento como en la acción, y que en ambos casos constituye un elemento fundamental para la transformación personal. Alicia encarna la curiosidad y la imaginación, desarrollando una visión crítica que le permite cuestionar la realidad. Dorothy y sus acompañantes descubren que poseen las capacidades necesarias para enfrentar los desafíos. El cambio no depende únicamente del entorno, sino también de la forma en que los individuos interpretan y responden a sus experiencias, destacando la creatividad como herramienta esencial en la construcción de la identidad.',
+      keywords: ['creatividad como herramienta', 'identidad y acción', 'identidad y pensamiento', 'autoconocimiento', 'Runco & Jaeger', 'personajes redondos']
+    },
+    r1: {
+      title: 'Alice in Wonderland — Tim Burton, dir. (Walt Disney Pictures, 2010)',
+      author: 'Reseña de Leonardo Nava',
+      abstract: 'La adaptación de Burton transforma el universo de Carroll en un espacio de crisis identitaria. Alicia, a los diecinueve años, debe enfrentarse a un mundo que desafía toda lógica. La creatividad no es aquí un rasgo decorativo sino la única herramienta disponible para navegar lo absurdo y construir una identidad propia que rechace las expectativas externas. La película demuestra que el género fantástico puede funcionar como espejo del conflicto identitario de los personajes.',
+      keywords: ['reseña', 'Tim Burton', 'fantasía oscura', 'crisis identitaria', 'creatividad adaptativa']
+    },
+    r2: {
+      title: 'The Wonderful Wizard of Oz — L. Frank Baum (George M. Hill Company, 1900)',
+      author: 'Reseña de Santino Alarcon',
+      abstract: 'La novela de Baum construye un espacio fantástico donde la creatividad adopta una forma práctica y acumulativa. Dorothy y sus compañeros resuelven problemas concretos en un recorrido episódico cuya lógica interna permanece estable, a diferencia del País de las Maravillas. El descubrimiento de que las cualidades buscadas ya residían en los personajes convierte la obra en una reflexión sobre el autoconocimiento como forma de transformación.',
+      keywords: ['reseña', 'L. Frank Baum', 'fantasía clásica', 'autoconocimiento', 'creatividad práctica']
+    },
+    r3: {
+      title: 'Wicked — Jon M. Chu, dir. (Universal Pictures, 2024)',
+      author: 'Reseña de Mateo Alatorre',
+      abstract: 'La adaptación cinematográfica de Chu presenta el espacio social y político de Oz como determinante en la transformación de Elphaba. A diferencia de Burton y Baum, donde el entorno fantástico opera como escenario de pruebas individuales, en Wicked el espacio impone presiones colectivas que condicionan la identidad desde afuera. La creatividad aquí es resistencia: la capacidad de mantener la propia identidad frente a un sistema que la niega.',
+      keywords: ['reseña', 'Jon M. Chu', 'fantasía política', 'resistencia', 'identidad social', 'Bakhtin']
+    }
+  };
+
+  function openModal(id) {
+    const art = articles[id];
+    if (!art) return;
+    document.getElementById('modal-title').textContent = art.title;
+    document.getElementById('modal-author').textContent = art.author;
+    document.getElementById('modal-abstract').textContent = art.abstract;
+    document.getElementById('modal-keywords').innerHTML = art.keywords.map(k => `<span class="kw-tag">${k}</span>`).join('');
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(event) {
+    if (!event || event.target === document.getElementById('modal-overlay') || event.currentTarget === document.querySelector('.modal-close')) {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>
